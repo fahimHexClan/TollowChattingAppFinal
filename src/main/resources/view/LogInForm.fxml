@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.ChatApp.Controller.LogInFormController">
+   <children>
+      <ImageView fitHeight="209.0" fitWidth="413.0" layoutY="391.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Photos/W.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="312.0" fitWidth="413.0" layoutX="-9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../logo/tollow-chatting-app-high-resolution-logo.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtName" layoutX="60.0" layoutY="287.0" prefHeight="25.0" prefWidth="293.0" />
+      <Button fx:id="ButtonLogInOnAction" layoutX="169.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Log In" />
+   </children>
+</AnchorPane>

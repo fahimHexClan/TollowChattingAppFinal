@@ -30,24 +30,30 @@
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor></TextField>
-      <Button layoutX="22.0" layoutY="553.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: white;" textFill="WHITE" />
-      <Button layoutX="302.0" layoutY="555.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" />
-      <Button layoutX="340.0" layoutY="554.0" mnemonicParsing="false" onAction="#sendOnAction" prefHeight="25.0" prefWidth="33.0" />
-      <ImageView fitHeight="25.0" fitWidth="34.0" layoutX="22.0" layoutY="553.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Photos/emoji.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="305.0" layoutY="554.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Photos/icons8-attach-100.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="34.0" layoutX="344.0" layoutY="554.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Photos/sendmessage.png" />
-         </image>
-      </ImageView>
+      <Button layoutX="12.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: white;" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photos/emoji.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="300.0" layoutY="551.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photos/icons8-attach-100.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="348.0" layoutY="552.0" mnemonicParsing="false" onAction="#sendOnAction" prefHeight="25.0" prefWidth="33.0">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photos/sendmessage.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <Text fill="#5d5757" layoutX="35.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tollow Chat Room" wrappingWidth="350.3129577636719">
          <font>
             <Font name="System Bold" size="32.0" />

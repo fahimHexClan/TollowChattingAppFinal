@@ -19,6 +19,6 @@
          </image>
       </ImageView>
       <TextField fx:id="txtName" layoutX="60.0" layoutY="287.0" prefHeight="25.0" prefWidth="293.0" />
-      <Button fx:id="ButtonLogInOnAction" layoutX="169.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Log In" />
+      <Button layoutX="169.0" layoutY="331.0" mnemonicParsing="false" onAction="#ButtonLogInOnAction" prefHeight="25.0" prefWidth="74.0" text="Log In" />
    </children>
 </AnchorPane>

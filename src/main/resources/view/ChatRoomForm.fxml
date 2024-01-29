@@ -30,7 +30,7 @@
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor></TextField>
-      <Button layoutX="12.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: white;" textFill="WHITE">
+      <Button layoutX="12.0" layoutY="550.0" mnemonicParsing="false" onAction="#EmojiSendOnAction" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: white;" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -38,7 +38,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="300.0" layoutY="551.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0">
+      <Button layoutX="300.0" layoutY="551.0" mnemonicParsing="false" onAction="#ImagSendOnAction" prefHeight="25.0" prefWidth="33.0">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>

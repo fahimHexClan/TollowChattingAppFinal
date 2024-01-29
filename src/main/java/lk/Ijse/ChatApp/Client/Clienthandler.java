@@ -1,4 +1,4 @@
-package lk.Ijse.ChatApp.Controller;
+package lk.Ijse.ChatApp.Client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

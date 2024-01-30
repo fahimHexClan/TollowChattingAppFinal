@@ -1,23 +1,33 @@
 package lk.Ijse.ChatApp.Controller;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import javafx.stage.FileChooser;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.Socket;
 import java.util.Optional;
 
 public class ChatRoomFormController {
+    @FXML
+    private AnchorPane MainAnchorpane;
     public TextField txtMessage;
     public VBox vBox;
     public Label LabelTxt;
+    public ScrollPane MessageScrollPane;
     private Socket socket;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
@@ -74,20 +84,22 @@ public class ChatRoomFormController {
                 while (socket.isConnected()){
 
                     try {
-                        String message = dataInputStream.readUTF();
-                        System.out.println(message);
 
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                Label label = new Label(message);
-                                label.setStyle("-fx-background-color:#4CAF50;-fx-font-size:18;-fx-text-fill:black");
-                                HBox hBox = new HBox(label);
+                        String type = dataInputStream.readUTF();
+                        if (type.equals("Message")) {
+                            System.out.println("sms");
+                            String sms = dataInputStream.readUTF();
+                            setTxt(sms);
+                        }
+                        if (type.equals("image")) {
+                            //imge ek ganna
 
-                                hBox.setStyle("-fx-padding:20");
-                                vBox.getChildren().add(hBox);
-                            }
-                        });
+                            String size = dataInputStream.readUTF();
+                            System.out.println(size+"ssssss");
+                            byte[] blob = new byte[Integer.parseInt(size)];
+                            dataInputStream.readFully(blob);
+                            setImg(blob);
+                        }
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -97,10 +109,43 @@ public class ChatRoomFormController {
             }
         }).start();
     }
+
+    private void setImg(byte[] blob) {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Image image = new Image(new ByteArrayInputStream(blob));
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
+                // Create a new HBox to hold the image
+                HBox hBox = new HBox(imageView);
+                hBox.setStyle("-fx-padding:20;");
+
+                vBox.getChildren().add(hBox);  // Assuming vBox is your target VBox
+                MessageScrollPane.setVvalue(1.0);
+            }
+        });
+
+    }
+
+    public void setTxt(String message){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Label label = new Label(message);
+                label.setStyle("-fx-background-color:#4CAF50;-fx-font-size:18;-fx-text-fill:black");
+                HBox hBox = new HBox(label);
+
+                hBox.setStyle("-fx-padding:20");
+                vBox.getChildren().add(hBox);
+            }
+        });
+    }
     @FXML
     public void sendOnAction(ActionEvent actionEvent) {
         String message = txtMessage.getText();
         try {
+           dataOutputStream.writeUTF("Message");
             dataOutputStream.writeUTF(name+" : "+message); // x:hi
             dataOutputStream.flush();
 
@@ -116,6 +161,70 @@ public class ChatRoomFormController {
     }
     public void ImagSendOnAction(ActionEvent actionEvent) {
 
+
+        FileChooser chooser = new FileChooser();
+        File file =chooser.showOpenDialog(MainAnchorpane.getScene().getWindow());
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            if (fileInputStream!=null) {
+                Image image = new Image(fileInputStream);
+
+                byte[] blob = imagenToByte(image);
+                String path = file.getPath();
+                 sendImg(blob);
+                System.out.println(path);
+                setMyImg(image);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void setMyImg(Image image) {
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(100);
+        imageView.setFitHeight(100);
+
+        // Create a new HBox to hold the image
+        HBox hBox = new HBox(imageView);
+        hBox.setStyle("-fx-padding:20;");
+
+        vBox.getChildren().add(hBox);  // Assuming vBox is your target VBox
+        MessageScrollPane.setVvalue(1.0);
+    }
+
+
+
+
+    private void sendImg(byte[] blob) {
+        try {
+            dataOutputStream.writeUTF("image");
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(blob.length+"");
+            dataOutputStream.flush();
+            dataOutputStream.write(blob);
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+    private static byte[] imagenToByte(Image image) {
+        BufferedImage bufferimage = SwingFXUtils.fromFXImage(image, null);
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bufferimage, "jpg", output );
+            ImageIO.write(bufferimage, "png", output );
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        byte [] data = output.toByteArray();
+        return data;
     }
 
     public void EmojiSendOnAction(ActionEvent actionEvent) {

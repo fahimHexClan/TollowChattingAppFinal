@@ -16,7 +16,6 @@ public class Clienthandler {
     public static ArrayList<Clienthandler> clients = new ArrayList<>();
 
     public Clienthandler(Socket socket) {
-
         try {
             this.socket = socket;
             this.dataInputStream = new DataInputStream(socket.getInputStream());
@@ -25,45 +24,67 @@ public class Clienthandler {
             clients.add(this);
 
             listenMessage();
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void listenMessage(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                while (socket.isConnected()){
-                    try {
-
+    public void listenMessage() {
+        new Thread(() -> {
+            while (socket.isConnected()) {
+                try {
+                    String type = dataInputStream.readUTF();
+                    if (type.equals("Message")) {
                         String message = dataInputStream.readUTF();
-                        String[] name = message.split(" : "); // X : hi
+                        String[] name = message.split(" : ");
                         sender = name[0];
-
                         broadcastMessage(message);
-
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                    } else if (type.equals("image")) {
+                        receiveImage();
                     }
-
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-
             }
         }).start();
     }
 
-    private void broadcastMessage(String message) {
-        for (Clienthandler client: clients) {
+    private void receiveImage() {
+        try {
+            String size = dataInputStream.readUTF();
+            int imageSize = Integer.parseInt(size);
 
+            byte[] blob = new byte[imageSize];
+            dataInputStream.readFully(blob);
+
+            broadcastImage(blob);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void broadcastImage(byte[] blob) {
+        for (Clienthandler client : clients) {
             try {
-                if(!client.userName.equals(sender)) {
+                if (!client.userName.equals(sender)) {
+                    client.dataOutputStream.writeUTF("image");
+                    client.dataOutputStream.writeUTF(blob.length + "");
+                    client.dataOutputStream.write(blob);
+                    client.dataOutputStream.flush();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
+    private void broadcastMessage(String message) {
+        for (Clienthandler client : clients) {
+            try {
+                if (!client.userName.equals(sender)) {
+                    client.dataOutputStream.writeUTF("Message");
                     client.dataOutputStream.writeUTF(message);
                     client.dataOutputStream.flush();
-
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

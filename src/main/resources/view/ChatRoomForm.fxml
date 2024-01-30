@@ -13,14 +13,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.ChatApp.Controller.ChatRoomFormController">
+<AnchorPane fx:id="MainAnchorpane" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.ChatApp.Controller.ChatRoomFormController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="400.0" pickOnBounds="true">
          <image>
             <Image url="@../Photos/W.jpg" />
          </image>
       </ImageView>
-      <ScrollPane layoutX="20.0" layoutY="60.0" prefHeight="464.0" prefWidth="359.0">
+      <ScrollPane fx:id="MessageScrollPane" layoutX="20.0" layoutY="60.0" prefHeight="464.0" prefWidth="359.0">
          <content>
             <VBox fx:id="vBox" prefHeight="461.0" prefWidth="357.0">
                <children>

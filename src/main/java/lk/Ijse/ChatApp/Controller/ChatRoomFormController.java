@@ -17,6 +17,7 @@ import java.util.Optional;
 public class ChatRoomFormController {
     public TextField txtMessage;
     public VBox vBox;
+    public Label LabelTxt;
     private Socket socket;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
@@ -58,6 +59,7 @@ public class ChatRoomFormController {
             dataOutputStream.flush();
 
             listenMessage();
+            LabelTxt.setText(name);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

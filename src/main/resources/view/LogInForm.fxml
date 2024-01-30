@@ -8,17 +8,17 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.ChatApp.Controller.LogInFormController">
    <children>
-      <ImageView fitHeight="209.0" fitWidth="413.0" layoutY="391.0" pickOnBounds="true">
+      <ImageView fitHeight="235.0" fitWidth="413.0" layoutY="-2.0" pickOnBounds="true">
          <image>
-            <Image url="@../Photos/W.jpg" />
+            <Image url="@../Photos/full-shot-woman-using-apps-make-friends.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="312.0" fitWidth="413.0" layoutX="-9.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="312.0" fitWidth="413.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../logo/tollow-chatting-app-high-resolution-logo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtName" layoutX="60.0" layoutY="287.0" prefHeight="25.0" prefWidth="293.0" />
-      <Button layoutX="169.0" layoutY="331.0" mnemonicParsing="false" onAction="#ButtonLogInOnAction" prefHeight="25.0" prefWidth="74.0" text="Log In" />
+      <TextField fx:id="txtName" layoutX="60.0" layoutY="509.0" prefHeight="25.0" prefWidth="293.0" />
+      <Button layoutX="168.0" layoutY="551.0" mnemonicParsing="false" onAction="#ButtonLogInOnAction" prefHeight="25.0" prefWidth="74.0" text="Log In" />
    </children>
 </AnchorPane>

@@ -79,8 +79,9 @@ public class ChatRoomFormController {
                             @Override
                             public void run() {
                                 Label label = new Label(message);
-                                label.setStyle("-fx-background-color:blue;-fx-font-size:18;-fx-text-fill:white");
+                                label.setStyle("-fx-background-color:#4CAF50;-fx-font-size:18;-fx-text-fill:black");
                                 HBox hBox = new HBox(label);
+
                                 hBox.setStyle("-fx-padding:20");
                                 vBox.getChildren().add(hBox);
                             }

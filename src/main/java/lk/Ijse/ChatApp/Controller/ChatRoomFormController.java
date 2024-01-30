@@ -2,6 +2,7 @@ package lk.Ijse.ChatApp.Controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -94,27 +95,27 @@ public class ChatRoomFormController {
         }).start();
     }
     @FXML
-   public void sendOnAction(ActionEvent actionEvent) {
-    String message = txtMessage.getText();
-    try {
-        dataOutputStream.writeUTF(name+" : "+message); // x:hi
-        dataOutputStream.flush();
+    public void sendOnAction(ActionEvent actionEvent) {
+        String message = txtMessage.getText();
+        try {
+            dataOutputStream.writeUTF(name+" : "+message); // x:hi
+            dataOutputStream.flush();
 
-        Label label = new Label(message);
-        label.setStyle("-fx-background-color:Red;-fx-font-size:18;-fx-text-fill:white");
-        HBox hBox = new HBox(label);
-        hBox.setStyle("-fx-padding:20;");
-        vBox.getChildren().add(hBox);
-    } catch (IOException e) {
-        throw new RuntimeException(e);
+            Label label = new Label(message);
+            label.setStyle("-fx-background-color:rgb(37, 150, 190);-fx-font-size:18;-fx-text-fill:black");
+            HBox hBox = new HBox(label);
+            hBox.setStyle("-fx-padding:20;");
+            hBox.setAlignment(Pos.CENTER_RIGHT);  // Align to the right for the user's messages
+            vBox.getChildren().add(hBox);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-    }
-       public void ImagSendOnAction(ActionEvent actionEvent) {
+    public void ImagSendOnAction(ActionEvent actionEvent) {
 
     }
 
     public void EmojiSendOnAction(ActionEvent actionEvent) {
-        // Show a dialog with a list of emojis
         ChoiceDialog<String> emojiDialog = new ChoiceDialog<>(null, emojis);
         emojiDialog.setTitle("Choose Emoji");
         emojiDialog.setHeaderText(null);
@@ -122,10 +123,8 @@ public class ChatRoomFormController {
 
         Optional<String> result = emojiDialog.showAndWait();
         result.ifPresent(emoji -> {
-            // Append the selected emoji to the message text field
             String currentMessage = txtMessage.getText();
             txtMessage.setText(currentMessage + " " + emoji);
         });
     }
 }
-

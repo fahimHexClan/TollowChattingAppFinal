@@ -51,6 +51,7 @@ public class LogInFormController {
 
     public void ButtonLogInOnAction(ActionEvent actionEvent) throws IOException {
         name = txtName.getText();
+        txtName.clear();
 
         Parent rootNode = FXMLLoader.load(getClass().getResource("/view/ChatRoomForm.fxml"));
         Scene scene = new Scene(rootNode);

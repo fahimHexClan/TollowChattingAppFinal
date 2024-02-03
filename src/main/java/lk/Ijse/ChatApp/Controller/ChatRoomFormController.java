@@ -145,7 +145,7 @@ public class ChatRoomFormController {
     public void sendOnAction(ActionEvent actionEvent) {
         String message = txtMessage.getText();
         try {
-           dataOutputStream.writeUTF("Message");
+            dataOutputStream.writeUTF("Message");
             dataOutputStream.writeUTF(name+" : "+message); // x:hi
             dataOutputStream.flush();
 
@@ -155,6 +155,7 @@ public class ChatRoomFormController {
             hBox.setStyle("-fx-padding:20;");
             hBox.setAlignment(Pos.CENTER_RIGHT);  // Align to the right for the user's messages
             vBox.getChildren().add(hBox);
+            txtMessage.clear();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -171,7 +172,7 @@ public class ChatRoomFormController {
 
                 byte[] blob = imagenToByte(image);
                 String path = file.getPath();
-                 sendImg(blob);
+                sendImg(blob);
                 System.out.println(path);
                 setMyImg(image);
             }
@@ -185,10 +186,11 @@ public class ChatRoomFormController {
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(100);
         imageView.setFitHeight(100);
-
-        // Create a new HBox to hold the image
+            // Create a new HBox to hold the image
         HBox hBox = new HBox(imageView);
         hBox.setStyle("-fx-padding:20;");
+        hBox.setAlignment(Pos.CENTER_RIGHT);
+
 
         vBox.getChildren().add(hBox);  // Assuming vBox is your target VBox
         MessageScrollPane.setVvalue(1.0);
@@ -220,7 +222,6 @@ public class ChatRoomFormController {
             ImageIO.write(bufferimage, "jpg", output );
             ImageIO.write(bufferimage, "png", output );
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         byte [] data = output.toByteArray();

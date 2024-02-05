@@ -117,11 +117,11 @@ public class ChatRoomFormController {
                 ImageView imageView = new ImageView(image);
                 imageView.setFitWidth(100);
                 imageView.setFitHeight(100);
-                // Create a new HBox to hold the image
+
                 HBox hBox = new HBox(imageView);
                 hBox.setStyle("-fx-padding:20;");
 
-                vBox.getChildren().add(hBox);  // Assuming vBox is your target VBox
+                vBox.getChildren().add(hBox);
                 MessageScrollPane.setVvalue(1.0);
             }
         });
@@ -133,7 +133,7 @@ public class ChatRoomFormController {
             @Override
             public void run() {
                 Label label = new Label(message);
-                label.setStyle("-fx-background-color:#4CAF50;-fx-font-size:18;-fx-text-fill:black");
+                label.setStyle("-fx-background-color:C7C8CC;-fx-font-size:18;-fx-text-fill:black");
                 HBox hBox = new HBox(label);
 
                 hBox.setStyle("-fx-padding:20");
@@ -150,7 +150,7 @@ public class ChatRoomFormController {
             dataOutputStream.flush();
 
             Label label = new Label(message);
-            label.setStyle("-fx-background-color:rgb(37, 150, 190);-fx-font-size:18;-fx-text-fill:black");
+            label.setStyle("-fx-background-color:#8ACDD7;-fx-font-size:18;-fx-text-fill:black");
             HBox hBox = new HBox(label);
             hBox.setStyle("-fx-padding:20;");
             hBox.setAlignment(Pos.CENTER_RIGHT);  // Align to the right for the user's messages
@@ -186,13 +186,13 @@ public class ChatRoomFormController {
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(100);
         imageView.setFitHeight(100);
-            // Create a new HBox to hold the image
+
         HBox hBox = new HBox(imageView);
         hBox.setStyle("-fx-padding:20;");
         hBox.setAlignment(Pos.CENTER_RIGHT);
 
 
-        vBox.getChildren().add(hBox);  // Assuming vBox is your target VBox
+        vBox.getChildren().add(hBox);
         MessageScrollPane.setVvalue(1.0);
     }
 

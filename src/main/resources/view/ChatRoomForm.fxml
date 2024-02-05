@@ -24,7 +24,7 @@
          <content>
             <VBox fx:id="vBox" prefHeight="461.0" prefWidth="357.0">
                <children>
-                  <Label fx:id="LabelTxt" prefHeight="16.0" prefWidth="359.0" style="-fx-background-color: #AAABAA;" text="Fahim" textFill="#7c7c7c">
+                  <Label fx:id="LabelTxt" prefHeight="16.0" prefWidth="359.0" style="-fx-background-color: C7C8CC;" text="Fahim" textFill="#7c7c7c">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>

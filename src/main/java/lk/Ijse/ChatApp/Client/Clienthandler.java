@@ -33,13 +33,13 @@ public class Clienthandler {
         new Thread(() -> {
             while (socket.isConnected()) {
                 try {
-                    String type = dataInputStream.readUTF();
-                    if (type.equals("Message")) {
+                    String msg = dataInputStream.readUTF();
+                    if (msg.equals("Message")) {
                         String message = dataInputStream.readUTF();
                         String[] name = message.split(" : ");
                         sender = name[0];
                         broadcastMessage(message);
-                    } else if (type.equals("image")) {
+                    } else if (msg.equals("image")) {
                         receiveImage();
                     }
                 } catch (IOException e) {
